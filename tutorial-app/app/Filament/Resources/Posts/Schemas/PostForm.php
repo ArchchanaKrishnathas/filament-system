@@ -28,8 +28,14 @@ class PostForm
                     ->schema([
                         Group::make()
                             ->schema([
-                                TextInput::make("title"),
-                                TextInput::make("slug"),
+                                // TextInput::make("title")->rules("required|min:3"),
+                                TextInput::make("title")->rules(["required","min:3","max:10"]),
+
+                                // TextInput::make("slug")->required(),
+                                TextInput::make("slug")->required()->unique()
+                                        ->validationMessages([
+                                            "unique" =>"slug should be unique."
+                                        ]),
                                 // Select::make("category_id")->options(["one","two"])
                                 Select::make("category_id")
                                         ->label("Category")
