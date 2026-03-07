@@ -32,7 +32,7 @@ class PostForm
                                 TextInput::make("title")->rules(["required","min:3","max:10"]),
 
                                 // TextInput::make("slug")->required(),
-                                TextInput::make("slug")->required()->unique()
+                                TextInput::make("slug")->unique()
                                         ->validationMessages([
                                             "unique" =>"slug should be unique."
                                         ]),
@@ -46,20 +46,20 @@ class PostForm
                      ])->columnSpan(2),
                     // ])->columnSpanFull(),
 
-                Group::make()
-                    ->schema([
-                        Section::make("Image Upload")
-                            ->schema([
-                                FileUpload::make("image")->disk("public")->directory("posts")
-                            ]),
-                        Section::make("Meta")
-                            ->schema([
-                                TagsInput::make("tags"),
-                                Checkbox::make("published"),
-                                DatePicker::make("published_at")
-                            ])
-                    ])->columnSpan(1)
+                    Group::make()
+                        ->schema([
+                            Section::make("Image Upload")
+                                ->schema([
+                                    FileUpload::make("image")->disk("public")->directory("posts")
+                                ]),
+                            Section::make("Meta")
+                                ->schema([
+                                    TagsInput::make("tags"),
+                                    Checkbox::make("published"),
+                                    DatePicker::make("published_at")
+                                ])
+                        ])->columnSpan(1)
 
-                ])->columns(3);
-    }
+                    ])->columns(3);
+        }
 }
