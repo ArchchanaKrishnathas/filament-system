@@ -18,13 +18,17 @@ class PostsTable
             ->columns([
                 ImageColumn::make("image")->disk("public"),
                                                          //  php artisan storage:link
-                TextColumn::make("title"),
-                TextColumn::make("slug"),
+                TextColumn::make("title")->sortable(),
+                TextColumn::make("slug")->sortable(),
                 // TextColumn::make("category_id"),
-                TextColumn::make("category.name"),
-                ColorColumn::make("color")
+                TextColumn::make("category.name")->sortable(),
+                ColorColumn::make("color"),
+                TextColumn::make("created_at")
+                    ->label("Created At")
+                    ->datetime()
+                    ->sortable()
+            ])->defaultSort("title","asc")
 
-            ])
             ->filters([
                 //
             ])
