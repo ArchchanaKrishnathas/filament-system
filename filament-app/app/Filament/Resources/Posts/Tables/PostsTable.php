@@ -7,6 +7,7 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Forms\Components\DatePicker;
 use Filament\Tables\Columns\ColorColumn;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
@@ -19,17 +20,26 @@ class PostsTable
     {
         return $table
             ->columns([
-                ImageColumn::make("image")->disk("public"),
+                TextColumn::make("id")
+                        ->label("ID")
+                        ->toggleable(isToggledHiddenByDefault:true),
+                ImageColumn::make("image")->disk("public")->toggleable(),
                                                          //  php artisan storage:link
-                TextColumn::make("title")->sortable()->searchable(),
-                TextColumn::make("slug")->sortable()->searchable(),
+                TextColumn::make("title")->sortable()->searchable()->toggleable(),
+                TextColumn::make("slug")->sortable()->searchable()->toggleable(),
                 // TextColumn::make("category_id"),
-                TextColumn::make("category.name")->sortable()->searchable(),
-                ColorColumn::make("color"),
+                TextColumn::make("category.name")->sortable()->searchable()->toggleable(),
+                ColorColumn::make("color")->toggleable(),
+                TextColumn::make("tags")
+                        ->label("Tag")
+                        ->toggleable(isToggledHiddenByDefault:true),
+                IconColumn::make("published")
+                        ->boolean(),
                 TextColumn::make("created_at")
                     ->label("Created At")
                     ->datetime()
-                    ->sortable()
+                    // ->sortable()
+                    ->toggleable(isToggledHiddenByDefault:true),
             ])->defaultSort("title","asc")
 
             ->filters([
