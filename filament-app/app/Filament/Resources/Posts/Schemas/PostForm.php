@@ -39,7 +39,9 @@ class PostForm
                                 // Select::make("category_id")->options(["one","two"])
                                 Select::make("category_id")
                                         ->label("Category")
-                                        ->options(Category::all()->pluck("name","id")),
+                                        // ->options(Category::all()->pluck("name","id"))
+                                        ->relationship("category","name")
+                                        ->searchable(),
                                 ColorPicker::make("color")
                             ])->columns(2),
                         MarkdownEditor::make("body")
@@ -54,7 +56,10 @@ class PostForm
                                 ]),
                             Section::make("Meta")
                                 ->schema([
-                                    TagsInput::make("tags"),
+                                    // TagsInput::make("tags")
+                                    Select::make("tags")
+                                                ->relationship("tags","name")
+                                                ->multiple(),
                                     Checkbox::make("published"),
                                     DatePicker::make("published_at")
                                 ])

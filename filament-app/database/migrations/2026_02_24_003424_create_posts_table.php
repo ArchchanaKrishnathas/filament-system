@@ -14,15 +14,27 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string("title");
-            $table->string("slug");
+            $table->string("slug")->nullable();
             $table->integer("category_id");
-            $table->string("color");
-            $table->string("image");
-            $table->text("body");
-            $table->json("tags");
+            $table->string("color")->nullable();
+            $table->string("image")->nullable();
+            $table->text("body")->nullable();
+            // $table->json("tags")->nullable();
             $table->boolean("published")->default(false);
-            $table->date("published_at");
+            $table->date("published_at")->nullable();
             $table->timestamps();
+        });
+
+          Schema::create('tags', function (Blueprint $table) {
+            $table->id();
+            $table->string("name");
+            $table->timestamps();
+        });
+
+        Schema::create('post_tag', function (Blueprint $table) {
+            $table->foreignId("post_id")->constrained()->cascadeOnDelete();
+            $table->foreignId("tag_id")->constrained()->cascadeOnDelete();
+            $table->primary(["post_id","tag_id"]);
         });
     }
 
@@ -32,5 +44,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('posts');
+        Schema::dropIfExists('post_tag');
+        Schema::dropIfExists('tags');
     }
 };
