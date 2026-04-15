@@ -21,8 +21,10 @@ class TagsResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     // protected static ?string $recordTitleAttribute = 'name';
-     protected static string|\UnitEnum|null $navigationGroup= "Blog";
 
+    // protected static string|\UnitEnum|null $navigationGroup= "Blog";
+    protected static string|\UnitEnum|null $navigationGroup= "Masters";
+    protected static ?string $navigationParentItem = "Posts";
     public static function form(Schema $schema): Schema
     {
         return TagsForm::configure($schema);

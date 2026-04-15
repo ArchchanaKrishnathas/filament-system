@@ -26,7 +26,8 @@ class PostResource extends Resource
 
     // protected static ?string $recordTitleAttribute = 'name';
 
-     protected static string|\UnitEnum|null $navigationGroup= "Blog";
+    //  protected static string|\UnitEnum|null $navigationGroup= "Blog";
+    protected static string|\UnitEnum|null $navigationGroup= "Masters";
     protected static ?string $recordTitleAttribute = 'title';
 
     public static function getGloballySearchableAttributes(): array
