@@ -16,6 +16,7 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use UnitEnum;
 
 class PostResource extends Resource
 {
@@ -24,6 +25,8 @@ class PostResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     // protected static ?string $recordTitleAttribute = 'name';
+
+     protected static string|\UnitEnum|null $navigationGroup= "Blog";
     protected static ?string $recordTitleAttribute = 'title';
 
     public static function getGloballySearchableAttributes(): array

@@ -18,9 +18,20 @@ class CountryResource extends Resource
 {
     protected static ?string $model = Country::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::AdjustmentsHorizontal;
 
-    protected static ?string $recordTitleAttribute = 'name';
+    // protected static ?string $recordTitleAttribute = 'name';
+    protected static string|\UnitEnum|null $navigationGroup= "Locations";
+
+    protected static ?int $navigationSort = 3;
+
+    protected static ?string $modelLabel= "Manage Countries";
+
+    public static function getNavigationBadge(): ?string
+    {
+        return Country::count();
+    }
+    protected static ?string $recordTitleAttribute ="name";
 
     public static function form(Schema $schema): Schema
     {
